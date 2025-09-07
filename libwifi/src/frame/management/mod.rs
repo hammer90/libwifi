@@ -10,7 +10,7 @@ pub use association::{
     ReassociationResponse,
 };
 pub use authentication::{
-    Authentication, DEAUTHENTICATION_REASON_MAX, Deauthentication, DeauthenticationReason,
+    Authentication, Deauthentication, DeauthenticationReason, DEAUTHENTICATION_REASON_MAX,
 };
 pub use beacon::Beacon;
 pub use probe::{ProbeRequest, ProbeResponse};

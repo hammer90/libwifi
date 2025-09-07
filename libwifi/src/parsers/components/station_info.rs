@@ -1,10 +1,10 @@
 #![allow(dead_code)]
 use bitvec::prelude::*;
 use nom::{
-    IResult, Parser,
     bytes::complete::take,
     error::{Error, ErrorKind},
     number::complete::u8 as get_u8,
+    IResult, Parser,
 };
 
 use crate::frame::components::{

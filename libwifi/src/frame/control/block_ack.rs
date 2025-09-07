@@ -1,5 +1,5 @@
-use crate::Addresses;
 use crate::frame::components::{FrameControl, MacAddress, SequenceControl};
+use crate::Addresses;
 
 #[derive(Clone, Debug)]
 pub enum BlockAckMode {

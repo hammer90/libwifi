@@ -2,11 +2,11 @@ use bitvec::order::Lsb0;
 use bitvec::prelude::*;
 use bitvec::vec::BitVec;
 use nom::{
-    Parser,
     bits::{bits, complete::take as bit_take},
     bytes::complete::take,
     error::Error as NomError,
     number::complete::le_u64,
+    Parser,
 };
 
 use crate::frame::components::{FrameControl, SequenceControl};
