@@ -1,5 +1,6 @@
 #![doc = include_str!("../README.md")]
 
+mod bit_utils;
 /// Libwifi's own [Error] implementation
 pub mod error;
 /// The [Frame] enum and all frame structs.
