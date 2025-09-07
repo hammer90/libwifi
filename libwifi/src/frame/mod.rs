@@ -16,7 +16,7 @@ pub use data::*;
 pub use management::*;
 
 #[enum_dispatch(Addresses)]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, serde::Deserialize, serde::Serialize)]
 /// This represents all currently supported payloads for frame subtypes.
 /// Each variant is represented by its own struct.
 ///

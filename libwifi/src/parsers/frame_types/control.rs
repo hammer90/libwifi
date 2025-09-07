@@ -252,7 +252,11 @@ pub fn parse_block_ack(frame_control: FrameControl, input: &[u8]) -> Result<Fram
             let (_, (sequence_control, bitmap)) =
                 (parse_sequence_control, take(128usize)).parse(ack_information)?;
 
-            BlockAckInfo::Basic((tid_info, sequence_control, clone_slice::<128>(bitmap)))
+            BlockAckInfo::Basic((
+                tid_info,
+                sequence_control,
+                clone_slice::<128>(bitmap).to_vec(),
+            ))
         }
     };
 

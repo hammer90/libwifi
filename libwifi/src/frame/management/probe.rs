@@ -2,7 +2,7 @@ use libwifi_macros::AddressHeader;
 
 use crate::frame::components::*;
 
-#[derive(Clone, Debug, AddressHeader)]
+#[derive(Clone, Debug, AddressHeader, serde::Deserialize, serde::Serialize)]
 pub struct ProbeRequest {
     pub header: ManagementHeader,
     pub station_info: StationInfo,
@@ -22,7 +22,7 @@ impl ProbeRequest {
     }
 }
 
-#[derive(Clone, Debug, AddressHeader)]
+#[derive(Clone, Debug, AddressHeader, serde::Deserialize, serde::Serialize)]
 pub struct ProbeResponse {
     pub header: ManagementHeader,
     pub timestamp: u64,

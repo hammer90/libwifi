@@ -13,7 +13,9 @@ use rand::{rng, Rng, RngCore};
 /// // -> true
 /// ```
 ///
-#[derive(Clone, Debug, Hash, Eq, PartialEq, Copy, Ord, PartialOrd)]
+#[derive(
+    Clone, Debug, Hash, Eq, PartialEq, Copy, Ord, PartialOrd, serde::Deserialize, serde::Serialize,
+)]
 pub struct MacAddress(pub [u8; 6]);
 
 impl MacAddress {
@@ -145,7 +147,7 @@ impl fmt::Display for MacAddress {
     }
 }
 
-#[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Hash, serde::Deserialize, serde::Serialize)]
 pub enum MacParseError {
     InvalidDigit,
     InvalidLength,
@@ -228,7 +230,7 @@ pub fn generate_random_bytes(x: usize) -> Vec<u8> {
 
 // We need to be able to glob against mac addresses, so a MacAddressGlob will be a mac address that we can do a match against.
 
-#[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Hash, serde::Deserialize, serde::Serialize)]
 pub struct MacAddressGlob {
     pattern: [u8; 6],
     mask: [u8; 6],

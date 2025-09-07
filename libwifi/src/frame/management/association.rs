@@ -4,7 +4,7 @@ use crate::frame::components::*;
 
 use super::DeauthenticationReason;
 
-#[derive(Clone, Debug, AddressHeader)]
+#[derive(Clone, Debug, AddressHeader, serde::Deserialize, serde::Serialize)]
 pub struct AssociationRequest {
     pub header: ManagementHeader,
     pub beacon_interval: u16,
@@ -32,7 +32,7 @@ impl AssociationRequest {
     }
 }
 
-#[derive(Clone, Debug, AddressHeader)]
+#[derive(Clone, Debug, AddressHeader, serde::Deserialize, serde::Serialize)]
 pub struct AssociationResponse {
     pub header: ManagementHeader,
     pub capability_info: u16,
@@ -64,7 +64,7 @@ impl AssociationResponse {
     }
 }
 
-#[derive(Clone, Debug, AddressHeader)]
+#[derive(Clone, Debug, AddressHeader, serde::Deserialize, serde::Serialize)]
 pub struct ReassociationRequest {
     pub header: ManagementHeader,
     pub capability_info: u16,
@@ -96,7 +96,7 @@ impl ReassociationRequest {
     }
 }
 
-#[derive(Clone, Debug, AddressHeader)]
+#[derive(Clone, Debug, AddressHeader, serde::Deserialize, serde::Serialize)]
 pub struct ReassociationResponse {
     pub header: ManagementHeader,
     pub capability_info: u16,
@@ -125,7 +125,7 @@ impl ReassociationResponse {
     }
 }
 
-#[derive(Clone, Debug, AddressHeader)]
+#[derive(Clone, Debug, AddressHeader, serde::Deserialize, serde::Serialize)]
 pub struct Disassociation {
     pub header: ManagementHeader,
     pub reason_code: DeauthenticationReason,

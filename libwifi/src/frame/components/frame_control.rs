@@ -36,7 +36,7 @@ fn flag_is_set(data: u8, bit: u8) -> bool {
 /// - **bit_6** `protected`: Set if the frame body is encrypted (protected)
 /// - **bit_7** `order`: Set if the frame is being sent according to the _Strictly Ordered Class_.
 ///
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, serde::Deserialize, serde::Serialize)]
 pub struct FrameControl {
     pub protocol_version: FrameProtocolVersion,
     pub frame_type: FrameType,

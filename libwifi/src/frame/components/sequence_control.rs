@@ -1,4 +1,4 @@
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, serde::Deserialize, serde::Serialize)]
 pub struct SequenceControl {
     /// The 4 bit fragment number from a sequence control field.
     pub fragment_number: u8,

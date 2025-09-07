@@ -2,7 +2,7 @@ use std::fmt::{self, Display};
 
 use bitvec::{field::BitField, order::Lsb0, vec::BitVec};
 
-#[derive(Clone, Debug, Default)]
+#[derive(Clone, Debug, Default, serde::Deserialize, serde::Serialize)]
 /// StationInfo is used to parse and store variable length fields that are often sent
 /// with management frames.
 ///
@@ -246,7 +246,7 @@ impl StationInfo {
     }
 }
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, serde::Deserialize, serde::Serialize)]
 pub struct SupportedRate {
     pub mandatory: bool,
     pub rate: f32,
@@ -536,7 +536,7 @@ impl fmt::Display for DockingDevices {
     }
 }
 
-#[derive(Clone, Debug, Default)]
+#[derive(Clone, Debug, Default, serde::Deserialize, serde::Serialize)]
 pub struct VendorSpecificInfo {
     pub element_id: u8,
     pub length: u8,
@@ -559,7 +559,7 @@ impl VendorSpecificInfo {
     }
 }
 
-#[derive(Clone, Debug, Default)]
+#[derive(Clone, Debug, Default, serde::Deserialize, serde::Serialize)]
 pub struct WpsInformation {
     pub setup_state: WpsSetupState,
     pub manufacturer: String,
@@ -600,7 +600,7 @@ impl WpsInformation {
     }
 }
 
-#[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
 pub enum WpsSetupState {
     #[default]
     NotConfigured = 0x01,
@@ -617,7 +617,7 @@ impl Display for WpsSetupState {
     }
 }
 
-#[derive(Clone, Debug, Default)]
+#[derive(Clone, Debug, Default, serde::Deserialize, serde::Serialize)]
 pub struct WpaInformation {
     pub version: u16,
     pub multicast_cipher_suite: WpaCipherSuite,
@@ -651,7 +651,7 @@ impl WpaInformation {
     }
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, Default)]
+#[derive(Clone, Debug, PartialEq, Eq, Default, serde::Deserialize, serde::Serialize)]
 pub enum WpaCipherSuite {
     Wep40,
     Wep104,
@@ -673,7 +673,7 @@ impl WpaCipherSuite {
     }
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, Default)]
+#[derive(Clone, Debug, PartialEq, Eq, Default, serde::Deserialize, serde::Serialize)]
 pub enum WpaAkmSuite {
     #[default]
     Psk, // Typically represented as 00-50-F2-1
@@ -692,7 +692,7 @@ impl WpaAkmSuite {
 }
 
 // Define the RsnInformation struct to hold the parsed data
-#[derive(Clone, Debug, Default)]
+#[derive(Clone, Debug, Default, serde::Deserialize, serde::Serialize)]
 pub struct RsnInformation {
     pub version: u16,
     pub group_cipher_suite: RsnCipherSuite,
@@ -752,7 +752,7 @@ impl RsnInformation {
     }
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, Default)]
+#[derive(Clone, Debug, PartialEq, Eq, Default, serde::Deserialize, serde::Serialize)]
 pub enum RsnAkmSuite {
     #[default]
     PSK,
@@ -782,7 +782,7 @@ impl RsnAkmSuite {
     }
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, Default)]
+#[derive(Clone, Debug, PartialEq, Eq, Default, serde::Deserialize, serde::Serialize)]
 pub enum RsnCipherSuite {
     None,
     WEP,
@@ -808,7 +808,7 @@ impl RsnCipherSuite {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, serde::Deserialize, serde::Serialize)]
 pub struct HTCapabilities {
     pub ldpc_coding_capability: bool,
     /// is 20/40Mhz
@@ -851,7 +851,7 @@ impl HTCapabilities {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, serde::Deserialize, serde::Serialize)]
 pub enum SmPowerSave {
     Static = 0,
     Dynamic = 1,
@@ -868,7 +868,7 @@ impl From<u8> for SmPowerSave {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, serde::Deserialize, serde::Serialize)]
 pub enum RxStbc {
     None = 0,
     STBC1Stream = 1,
@@ -887,7 +887,7 @@ impl From<u8> for RxStbc {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, serde::Deserialize, serde::Serialize)]
 pub struct HTInformation {
     pub primary_channel: u8,
     pub secondary_channel_offset: SecondaryChannelOffset,
@@ -910,7 +910,7 @@ impl HTInformation {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, serde::Deserialize, serde::Serialize)]
 pub enum SecondaryChannelOffset {
     None = 0,
     Below = 1,
@@ -927,7 +927,7 @@ impl From<u8> for SecondaryChannelOffset {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, serde::Deserialize, serde::Serialize)]
 pub struct VHTCapabilities {
     pub maximum_mpdu_length: u8,
     pub rx_ldpc: bool,
@@ -936,7 +936,7 @@ pub struct VHTCapabilities {
     pub data: Vec<u8>, // TODO
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, serde::Deserialize, serde::Serialize)]
 pub struct MultipleBSSID {
     pub max_bssid_indicator: u8,
     pub other_data: Vec<u8>,
@@ -951,7 +951,7 @@ impl MultipleBSSID {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, serde::Deserialize, serde::Serialize)]
 pub struct ChannelSwitchAnnouncment {
     pub mode: ChannelSwitchMode,
     pub new_channel: u8,
@@ -964,7 +964,7 @@ impl ChannelSwitchAnnouncment {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
 pub enum ChannelSwitchMode {
     Restrict = 1,
     Unrestricted = 0,
@@ -979,7 +979,7 @@ impl ChannelSwitchMode {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
 pub struct ExtendedCapabilities {
     // Extended capabilities elements per 80211ax-2021
     pub bss_coexistence_management_support: bool, // bit 0

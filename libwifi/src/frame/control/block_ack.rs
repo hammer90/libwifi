@@ -1,7 +1,7 @@
 use crate::frame::components::{FrameControl, MacAddress, SequenceControl};
 use crate::Addresses;
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, serde::Deserialize, serde::Serialize)]
 pub enum BlockAckMode {
     /// Deprecated ack format, which uses a 128 byte map for acknowledgment.
     BasicBlockAck,
@@ -12,11 +12,11 @@ pub enum BlockAckMode {
     MultiTidBlockAck,
 }
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, serde::Deserialize, serde::Serialize)]
 pub enum BlockAckInfo {
     /// A simple BlockAck response with an 128 bytes bitmap.
     /// This is deprecated and should barely be used in practice.
-    Basic((u8, SequenceControl, [u8; 128])),
+    Basic((u8, SequenceControl, Vec<u8>)),
     /// A vector of tuples of (TID, SequenceControl, 8byte Bitmap).
     Compressed(Vec<(u8, SequenceControl, u64)>),
 }
@@ -29,7 +29,7 @@ pub enum BlockAckInfo {
 /// this frame is sent to acknowledge any received frames.
 ///
 /// [Guide](https://www.hitchhikersguidetolearning.com/2017/09/17/block-ack-frame-formats-block-ack-request/).
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, serde::Deserialize, serde::Serialize)]
 pub struct BlockAckRequest {
     pub frame_control: FrameControl,
     pub duration: [u8; 2],
@@ -70,7 +70,7 @@ impl Addresses for BlockAckRequest {
 /// The AP will then respond with a [BlockAck] frame, acknowledging all received packets.
 ///
 /// [Guide](https://www.hitchhikersguidetolearning.com/2017/09/17/block-ack-frame-formats-block-ack-request/).
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, serde::Deserialize, serde::Serialize)]
 pub struct BlockAck {
     pub frame_control: FrameControl,
     pub duration: [u8; 2],

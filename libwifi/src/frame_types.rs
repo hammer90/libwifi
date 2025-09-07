@@ -1,7 +1,9 @@
 use strum_macros::Display;
 
 /// Enum with protocol version
-#[derive(Copy, Clone, PartialEq, Eq, Hash, Debug, Display)]
+#[derive(
+    Copy, Clone, PartialEq, Eq, Hash, Debug, Display, serde::Deserialize, serde::Serialize,
+)]
 pub enum FrameProtocolVersion {
     PV0,
     Unknown(u8),
@@ -16,7 +18,9 @@ impl FrameProtocolVersion {
 }
 
 /// Enum with all frame types.
-#[derive(Copy, Clone, PartialEq, Eq, Hash, Debug, Display)]
+#[derive(
+    Copy, Clone, PartialEq, Eq, Hash, Debug, Display, serde::Deserialize, serde::Serialize,
+)]
 pub enum FrameType {
     Management,
     Control,
@@ -56,7 +60,9 @@ pub enum ManagementSubTypes {
 }
 
 /// Enum with all frame subtypes.
-#[derive(Copy, Clone, PartialEq, Eq, Hash, Debug, Display)]
+#[derive(
+    Copy, Clone, PartialEq, Eq, Hash, Debug, Display, serde::Deserialize, serde::Serialize,
+)]
 pub enum FrameSubType {
     // Management subtypes
     AssociationRequest,

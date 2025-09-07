@@ -26,7 +26,7 @@ use crate::traits::Addresses;
 ///
 /// **Sequence Control:** \
 /// Contains the FragmentNumber and SequenceNumber that define the main frame and the number of fragments in the frame.
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, serde::Deserialize, serde::Serialize)]
 pub struct ManagementHeader {
     pub frame_control: FrameControl,
     pub duration: [u8; 2],
@@ -147,7 +147,7 @@ impl Addresses for ManagementHeader {
 /// byte 22-23: Sequence Control.
 /// byte 24-30: Address 4 (Exists if to_ds and from_ds is set)
 /// byte 31-32: Quality of Service bytes, only exists in QoS Data frames.
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, serde::Deserialize, serde::Serialize)]
 pub struct DataHeader {
     pub frame_control: FrameControl,
     pub duration: [u8; 2],

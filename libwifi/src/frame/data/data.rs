@@ -4,7 +4,7 @@ use crate::frame::components::*;
 
 use super::{DataFrame, EapolKey, NullDataFrame};
 
-#[derive(Clone, Debug, AddressHeader)]
+#[derive(Clone, Debug, AddressHeader, serde::Deserialize, serde::Serialize)]
 pub struct Data {
     pub header: DataHeader,
     pub eapol_key: Option<EapolKey>,
@@ -45,7 +45,7 @@ impl DataFrame for Data {
     }
 }
 
-#[derive(Clone, Debug, AddressHeader)]
+#[derive(Clone, Debug, AddressHeader, serde::Deserialize, serde::Serialize)]
 pub struct DataCfAck {
     pub header: DataHeader,
     pub eapol_key: Option<EapolKey>,
@@ -64,7 +64,7 @@ impl DataFrame for DataCfAck {
     }
 }
 
-#[derive(Clone, Debug, AddressHeader)]
+#[derive(Clone, Debug, AddressHeader, serde::Deserialize, serde::Serialize)]
 pub struct DataCfPoll {
     pub header: DataHeader,
     pub eapol_key: Option<EapolKey>,
@@ -83,7 +83,7 @@ impl DataFrame for DataCfPoll {
     }
 }
 
-#[derive(Clone, Debug, AddressHeader)]
+#[derive(Clone, Debug, AddressHeader, serde::Deserialize, serde::Serialize)]
 pub struct DataCfAckCfPoll {
     pub header: DataHeader,
     pub eapol_key: Option<EapolKey>,
@@ -102,7 +102,7 @@ impl DataFrame for DataCfAckCfPoll {
     }
 }
 
-#[derive(Clone, Debug, AddressHeader)]
+#[derive(Clone, Debug, AddressHeader, serde::Deserialize, serde::Serialize)]
 pub struct CfAck {
     pub header: DataHeader,
 }
@@ -113,7 +113,7 @@ impl NullDataFrame for CfAck {
     }
 }
 
-#[derive(Clone, Debug, AddressHeader)]
+#[derive(Clone, Debug, AddressHeader, serde::Deserialize, serde::Serialize)]
 pub struct CfPoll {
     pub header: DataHeader,
 }
@@ -124,7 +124,7 @@ impl NullDataFrame for CfPoll {
     }
 }
 
-#[derive(Clone, Debug, AddressHeader)]
+#[derive(Clone, Debug, AddressHeader, serde::Deserialize, serde::Serialize)]
 pub struct CfAckCfPoll {
     pub header: DataHeader,
 }
@@ -135,7 +135,7 @@ impl NullDataFrame for CfAckCfPoll {
     }
 }
 
-#[derive(Clone, Debug, AddressHeader)]
+#[derive(Clone, Debug, AddressHeader, serde::Deserialize, serde::Serialize)]
 pub struct NullData {
     pub header: DataHeader,
 }

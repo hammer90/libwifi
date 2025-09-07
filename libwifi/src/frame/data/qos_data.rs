@@ -10,7 +10,7 @@ use std::{
 
 use super::{DataFrame, NullDataFrame};
 
-#[derive(Clone, Debug, AddressHeader)]
+#[derive(Clone, Debug, AddressHeader, serde::Deserialize, serde::Serialize)]
 pub struct QosData {
     pub header: DataHeader,
     pub eapol_key: Option<EapolKey>,
@@ -29,7 +29,7 @@ impl DataFrame for QosData {
     }
 }
 
-#[derive(Clone, Debug, AddressHeader)]
+#[derive(Clone, Debug, AddressHeader, serde::Deserialize, serde::Serialize)]
 pub struct QosDataCfAck {
     pub header: DataHeader,
     pub eapol_key: Option<EapolKey>,
@@ -48,7 +48,7 @@ impl DataFrame for QosDataCfAck {
     }
 }
 
-#[derive(Clone, Debug, AddressHeader)]
+#[derive(Clone, Debug, AddressHeader, serde::Deserialize, serde::Serialize)]
 pub struct QosDataCfPoll {
     pub header: DataHeader,
     pub eapol_key: Option<EapolKey>,
@@ -67,7 +67,7 @@ impl DataFrame for QosDataCfPoll {
     }
 }
 
-#[derive(Clone, Debug, AddressHeader)]
+#[derive(Clone, Debug, AddressHeader, serde::Deserialize, serde::Serialize)]
 pub struct QosDataCfAckCfPoll {
     pub header: DataHeader,
     pub eapol_key: Option<EapolKey>,
@@ -86,7 +86,7 @@ impl DataFrame for QosDataCfAckCfPoll {
     }
 }
 
-#[derive(Clone, Debug, AddressHeader)]
+#[derive(Clone, Debug, AddressHeader, serde::Deserialize, serde::Serialize)]
 pub struct QosCfPoll {
     pub header: DataHeader,
 }
@@ -97,7 +97,7 @@ impl NullDataFrame for QosCfPoll {
     }
 }
 
-#[derive(Clone, Debug, AddressHeader)]
+#[derive(Clone, Debug, AddressHeader, serde::Deserialize, serde::Serialize)]
 pub struct QosCfAckCfPoll {
     pub header: DataHeader,
 }
@@ -108,7 +108,7 @@ impl NullDataFrame for QosCfAckCfPoll {
     }
 }
 
-#[derive(Clone, Debug, AddressHeader)]
+#[derive(Clone, Debug, AddressHeader, serde::Deserialize, serde::Serialize)]
 pub struct QosNull {
     pub header: DataHeader,
 }
@@ -119,7 +119,7 @@ impl NullDataFrame for QosNull {
     }
 }
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, serde::Deserialize, serde::Serialize)]
 pub struct KeyInformation {
     pub descriptor_version: u8,
     pub key_type: bool,
@@ -134,7 +134,7 @@ pub struct KeyInformation {
     pub smk_message: bool,
 }
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, serde::Deserialize, serde::Serialize)]
 pub struct EapolKey {
     pub protocol_version: u8,
     pub timestamp: SystemTime,
@@ -348,7 +348,7 @@ impl EapolKey {
     }
 }
 
-#[derive(Clone, Debug, Eq, PartialEq, PartialOrd, Ord)]
+#[derive(Clone, Debug, Eq, PartialEq, PartialOrd, Ord, serde::Deserialize, serde::Serialize)]
 pub enum MessageType {
     Message1,
     Message2,
@@ -372,7 +372,7 @@ impl std::fmt::Display for MessageType {
 }
 
 // PMKID struct definition
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, serde::Deserialize, serde::Serialize)]
 pub struct Pmkid {
     pub id: u8,
     pub len: u8,

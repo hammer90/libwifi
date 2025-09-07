@@ -3,7 +3,7 @@ use libwifi_macros::AddressHeader;
 
 pub const DEAUTHENTICATION_REASON_MAX: u8 = 46;
 
-#[derive(Clone, Debug, AddressHeader)]
+#[derive(Clone, Debug, AddressHeader, serde::Deserialize, serde::Serialize)]
 pub struct Authentication {
     pub header: ManagementHeader,
     pub auth_algorithm: u16,
@@ -41,7 +41,7 @@ impl Authentication {
     }
 }
 
-#[derive(Clone, Debug, AddressHeader)]
+#[derive(Clone, Debug, AddressHeader, serde::Deserialize, serde::Serialize)]
 pub struct Deauthentication {
     pub header: ManagementHeader,
     pub reason_code: DeauthenticationReason,
@@ -60,7 +60,7 @@ impl Deauthentication {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(Debug, PartialEq, Eq, Clone, serde::Deserialize, serde::Serialize)]
 pub enum DeauthenticationReason {
     UnspecifiedReason = 1,
     PreviousAuthenticationNoLongerValid = 2,

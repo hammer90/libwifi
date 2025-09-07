@@ -2,7 +2,7 @@ use libwifi_macros::AddressHeader;
 
 use crate::frame::components::*;
 
-#[derive(Clone, Debug, AddressHeader)]
+#[derive(Clone, Debug, AddressHeader, serde::Deserialize, serde::Serialize)]
 pub struct Beacon {
     pub header: ManagementHeader,
     pub timestamp: u64,

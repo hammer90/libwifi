@@ -7,7 +7,7 @@ use crate::Addresses;
 ///
 /// This protocol was introduced to reduce frame collisions introduced by the
 /// [hidden node problem](https://en.wikipedia.org/wiki/Hidden_node_problem).
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, serde::Deserialize, serde::Serialize)]
 pub struct Rts {
     pub frame_control: FrameControl,
     pub duration: [u8; 2],
@@ -35,7 +35,7 @@ impl Addresses for Rts {
 ///
 /// The protocol was introduced to reduce frame collisions introduced by the
 /// [hidden node problem](https://en.wikipedia.org/wiki/Hidden_node_problem).
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, serde::Deserialize, serde::Serialize)]
 pub struct Cts {
     pub frame_control: FrameControl,
     pub duration: [u8; 2],
@@ -78,7 +78,7 @@ impl Addresses for Cts {
 ///
 /// The protocol was introduced to reduce frame collisions introduced by the
 /// [hidden node problem](https://en.wikipedia.org/wiki/Hidden_node_problem).
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, serde::Deserialize, serde::Serialize)]
 pub struct Ack {
     pub frame_control: FrameControl,
     pub duration: [u8; 2],
