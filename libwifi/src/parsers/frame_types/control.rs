@@ -1,6 +1,3 @@
-use bitvec::order::Lsb0;
-use bitvec::prelude::*;
-use bitvec::vec::BitVec;
 use nom::{
     bits::{bits, complete::take as bit_take},
     bytes::complete::take,
@@ -9,9 +6,12 @@ use nom::{
     Parser,
 };
 
-use crate::frame::components::{FrameControl, SequenceControl};
 use crate::frame::*;
 use crate::parsers::{clone_slice, parse_mac};
+use crate::{
+    bit_utils::{get_bit, get_bits},
+    frame::components::{FrameControl, SequenceControl},
+};
 use crate::{error::Error, parsers::parse_sequence_control};
 
 /// Parse a [Rts] frame.
@@ -72,13 +72,12 @@ pub fn parse_block_ack_request(frame_control: FrameControl, input: &[u8]) -> Res
     let (mut request_information, (duration, destination, source, bar_control)) =
         (take(2usize), parse_mac, parse_mac, take(2usize)).parse(input)?;
 
-    let b = BitVec::<u8, Lsb0>::from_slice(bar_control);
     let (policy, multi_tid, compressed_bitmap, _, tid_info) = (
-        b[0],
-        b[1],
-        b[2],
-        b[3..11].load::<u8>(), // reserved
-        b[12..15].load::<u8>(),
+        get_bit(bar_control, 0),
+        get_bit(bar_control, 1),
+        get_bit(bar_control, 2),
+        0, //b[3..11].load::<u8>(), // reserved
+        get_bits(bar_control, 12, 15),
     );
 
     // The TID_INFO and the BAR information field work in conjunction to provide information on
@@ -165,13 +164,12 @@ pub fn parse_block_ack(frame_control: FrameControl, input: &[u8]) -> Result<Fram
     let (mut ack_information, (duration, destination, source, bar_control)) =
         (take(2usize), parse_mac, parse_mac, take(2usize)).parse(input)?;
 
-    let b = BitVec::<u8, Lsb0>::from_slice(bar_control);
     let (policy, multi_tid, compressed_bitmap, _, tid_info) = (
-        b[0],
-        b[1],
-        b[2],
-        b[3..11].load::<u8>(), // reserved
-        b[12..15].load::<u8>(),
+        get_bit(bar_control, 0),
+        get_bit(bar_control, 1),
+        get_bit(bar_control, 2),
+        0, //b[3..11].load::<u8>(), // reserved
+        get_bits(bar_control, 12, 15),
     );
 
     // The TID_INFO and the BAR information field work in conjunction to provide information on
